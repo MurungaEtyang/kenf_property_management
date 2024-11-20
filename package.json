@@ -20,5 +20,13 @@
   "bugs": {
     "url": "https://github.com/MurungaEtyang/kenf_property_management/issues"
   },
-  "homepage": "https://github.com/MurungaEtyang/kenf_property_management#readme"
+  "homepage": "https://github.com/MurungaEtyang/kenf_property_management#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.4",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  }
 }
