@@ -1,6 +1,7 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import pool from '../../database/Config.js';
+import generateRandomCode from "../../utils/confirmation_code/generateCode.js";
 
 const router = Router();
 
@@ -70,6 +71,8 @@ router.post('/add', async (req, res) => {
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+        const propertyUniqueID = generateRandomCode(10);
+
         const [landlords] = await pool.query('SELECT * FROM landlords WHERE user_id = ?', [decoded.userId]);
 
         if (!landlords.length) {
@@ -85,10 +88,12 @@ router.post('/add', async (req, res) => {
         }
 
         const query = `
-            INSERT INTO properties (landlord_id, property_name, property_type, location, number_of_units, price_range, amenities)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO properties (landlord_id, property_name, property_type, location, number_of_units,
+                                    price_range, amenities, property_unique_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
         `;
-        const values = [landlord.id, property_name, property_type, location, number_of_units, price_range, JSON.stringify(amenities)];
+
+        const values = [landlord.user_national_id, property_name, property_type, location, number_of_units, price_range, JSON.stringify(amenities), propertyUniqueID];
 
         const [result] = await pool.query(query, values);
 
