@@ -2,6 +2,7 @@
   "name": "kenf",
   "version": "1.0.1",
   "description": "Property management involves the operation, control, and oversight of real estate properties on behalf of the property owner. This includes managing residential, commercial, or industrial properties. The main goals of property management are to maximize the value of the property, ensure it is well-maintained, and provide a high level of service to tenants.",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "test": "kenf-test"
@@ -22,10 +23,13 @@
   },
   "homepage": "https://github.com/MurungaEtyang/kenf_property_management#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.11.4",
+    "nodemailer": "^6.9.16",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   }

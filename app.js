@@ -1,19 +1,22 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
-const express = require('express');
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./swagger/swagger');
-const cors = require('cors');
+import express from 'express';
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swagger/swagger.js';
+import cors from 'cors';
+import routes from './routes/index.js';
 
 const app = express();
 
 const allowedOrigins = ['http://localhost:3000', 'http://example.com', 'https://anotherdomain.com'];
 
 const corsOptions = {
-    origin: function (origin, callback) {
+    origin: (origin, callback) => {
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
         } else {
+            console.error(`Blocked by CORS: ${origin}`);
             callback(new Error('Not allowed by CORS'));
         }
     },
@@ -24,11 +27,9 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-// Routes for the API
-// Example: app.use('/api/users', usersRouter);
+app.use('/api/kenf/management/', routes);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || 'http://localhost';

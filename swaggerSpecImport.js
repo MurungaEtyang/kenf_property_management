@@ -1,0 +1,1 @@
+import swaggerSpec from './swagger/swagger.js';
